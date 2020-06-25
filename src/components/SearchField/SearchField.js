@@ -1,10 +1,16 @@
 import React from 'react';
-import { Divider } from 'antd';
+import { Input } from 'antd';
 
-const SearchField = () => {
+
+
+
+const SearchField = props => {
+
+  const { Search } = Input;
+
   return ( 
     <div>
-      <h1>Search Field</h1>
+      <Search placeholder="lets find a note..." loading />
     </div>
    );
 }
