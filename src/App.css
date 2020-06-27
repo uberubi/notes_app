@@ -7,9 +7,23 @@
 }
 
 .sidebar {
-  background-color: chartreuse;
+  background-color: rgb(247, 247, 247);
 }
 
 .sidebar-item {
+
   border: 1px solid black;
+}
+
+.sidebar-item__title {
+  overflow:hidden;
+  max-width: 150px;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  
+}
+
+.sidebar-item__title:hover {
+  overflow:visible;
+
 }

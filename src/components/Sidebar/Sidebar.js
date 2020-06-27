@@ -1,17 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NotesContext } from "../../context";
 import SidebarItem from "./SidebarItem";
 
-const Sidebar = (props) => {
-  const firstNote = useContext(NotesContext);
+const Sidebar = props => {
   return (
     <>
       <NotesContext.Consumer>
         {(value) => {
-          console.log(value);
-          return value.map((note) => (
+          return value.notes.map((note) => (
             <SidebarItem
-              id={note.id}
+              key={note.id}
               title={note.title}
               text={note.text}
               date={note.date}
