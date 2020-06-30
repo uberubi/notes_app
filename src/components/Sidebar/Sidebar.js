@@ -3,12 +3,11 @@ import NotesList from "./NotesList";
 import { Input } from "antd";
 const { Search } = Input;
 
-const Sidebar = (props) => {
-  const [searchInput, setSearchInput] = useState();
-  console.log(searchInput);
+const Sidebar = () => {
+  const [search, setSearch] = useState('');
 
   const handleChange = (e) => {
-    setSearchInput(e.target.value);
+    setSearch(e.target.value);
   };
 
   return (
@@ -19,7 +18,7 @@ const Sidebar = (props) => {
           onChange={handleChange}
         />
       </div>
-      <NotesList searchInput={searchInput} />
+      <NotesList search={search} />
     </>
   );
 };

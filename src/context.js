@@ -5,6 +5,12 @@ const NotesContext = createContext();
 
 const NotesProvider = (props) => {
   const [state, setState] = useState({ notes: [] });
+  const [isNoteOpen, setIsNoteOpen] = useState(false);
+  const [openNote, setOpenNote] = useState({
+    title: "",
+    text: "",
+    date: "",
+  });
 
   useEffect(() => {
     db.table("notes")
@@ -28,10 +34,54 @@ const NotesProvider = (props) => {
       });
   };
 
-  console.log(state);
+  const handleOpenNote = (title, text, date) => {
+    setIsNoteOpen(true);
+    setOpenNote({
+      title,
+      text,
+      date,
+    });
+  };
+
+  const clearOpenNote = () => {
+    setOpenNote({
+      title: "",
+      text: "",
+      date: "",
+    })
+  }
+
+  const changeOpenNoteTitleHandler = (title, date) => {
+    setOpenNote((prevState) => ({
+      ...prevState,
+      title,
+      date
+    }));
+  };
+
+  const changeOpenNoteTextHandler = (text, date) => {
+    setOpenNote((prevState) => ({
+      ...prevState,
+      text,
+      date
+    }));
+  };
+
+  console.log(Object.values(openNote)  + '   NOTE OPENED');
 
   return (
-    <NotesContext.Provider value={{ state, handleAddNewNote }}>
+    <NotesContext.Provider
+      value={{
+        state,
+        handleAddNewNote,
+        handleOpenNote,
+        isNoteOpen,
+        openNote,
+        changeOpenNoteTitleHandler,
+        changeOpenNoteTextHandler,
+        clearOpenNote
+      }}
+    >
       {props.children}
     </NotesContext.Provider>
   );
