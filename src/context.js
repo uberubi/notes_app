@@ -4,42 +4,57 @@ import db from "./db";
 const NotesContext = createContext();
 
 const NotesProvider = (props) => {
-  const [state, setState] = useState({ notes: [] });
+  const [state, setState] = useState([]);
   const [isNoteOpen, setIsNoteOpen] = useState(false);
   const [openNote, setOpenNote] = useState({
+    id: "",
     title: "",
     text: "",
-    date: "",
   });
 
   useEffect(() => {
-    db.table("notes")
-      .toArray()
-      .then((notes) => {
-        setState({ notes });
-      });
+    const getPosts = async () => {
+      let notes = await db.notes.toArray();
+      setState(notes);
+    };
+    getPosts();
   }, []);
 
-  const handleAddNewNote = (title, text, date) => {
-    const note = {
-      title,
-      text,
-      date,
-    };
-    db.table("notes")
-      .add(note)
-      .then((id) => {
-        const newList = [...state.notes, Object.assign({}, note, { id })];
-        setState({ notes: newList });
+  const handleAddNewNote = (title, text) => {
+    if (title !== "" && text !== "") {
+      const note = {
+        title,
+        text,
+      };
+      db.notes.add(note).then(async () => {
+        let notes = await db.notes.toArray();
+        setState(notes);
       });
+    }
   };
 
-  const handleOpenNote = (title, text, date) => {
+  const handleDeleteNote = (id) => {
+    db.notes.delete(id).then(async () => {
+      let notes = await db.notes.toArray();
+      setState(notes);
+    });
+    setIsNoteOpen(false);
+  };
+
+  const handleUpdateNote = (id, title, text) => {
+    db.notes.update(id, { title, text }).then(async () => {
+      let notes = await db.notes.toArray();
+      setState(notes);
+    });
+    setIsNoteOpen(false);
+  };
+
+  const handleOpenNote = (id, title, text) => {
     setIsNoteOpen(true);
     setOpenNote({
+      id,
       title,
       text,
-      date,
     });
   };
 
@@ -48,26 +63,22 @@ const NotesProvider = (props) => {
       title: "",
       text: "",
       date: "",
-    })
-  }
+    });
+  };
 
-  const changeOpenNoteTitleHandler = (title, date) => {
+  const changeOpenNoteTitleHandler = (title) => {
     setOpenNote((prevState) => ({
       ...prevState,
       title,
-      date
     }));
   };
 
-  const changeOpenNoteTextHandler = (text, date) => {
+  const changeOpenNoteTextHandler = (text) => {
     setOpenNote((prevState) => ({
       ...prevState,
       text,
-      date
     }));
   };
-
-  console.log(Object.values(openNote)  + '   NOTE OPENED');
 
   return (
     <NotesContext.Provider
@@ -75,11 +86,13 @@ const NotesProvider = (props) => {
         state,
         handleAddNewNote,
         handleOpenNote,
+        handleDeleteNote,
+        handleUpdateNote,
         isNoteOpen,
         openNote,
         changeOpenNoteTitleHandler,
         changeOpenNoteTextHandler,
-        clearOpenNote
+        clearOpenNote,
       }}
     >
       {props.children}

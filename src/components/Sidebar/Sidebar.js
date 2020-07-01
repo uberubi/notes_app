@@ -4,7 +4,7 @@ import { Input } from "antd";
 const { Search } = Input;
 
 const Sidebar = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -13,10 +13,7 @@ const Sidebar = () => {
   return (
     <>
       <div>
-        <Search
-          placeholder="lets find a note..."
-          onChange={handleChange}
-        />
+        <Search placeholder="lets find a note..." onChange={handleChange} />
       </div>
       <NotesList search={search} />
     </>

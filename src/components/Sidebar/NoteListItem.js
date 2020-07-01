@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { NotesContext } from "../../context";
 
 const NotesListItem = ({ search, note }) => {
-  const { title, text, date } = note;
+  const { id, title, text } = note;
   if (
     search !== "" &&
     !text.toLowerCase().includes(search.toLowerCase()) &&
@@ -16,18 +16,17 @@ const NotesListItem = ({ search, note }) => {
   return (
     <NotesContext.Consumer>
       {(value) => {
-
         const handleClick = () => {
-          value.handleOpenNote(title, text, date)
-        }
+          value.handleOpenNote(id, title, text);
+        };
 
         return (
           <Wrapper onClick={handleClick}>
             <div className="sidebar-item__title">{title}</div>
             <div className="sidebar-item__text">{text}</div>
-            <div className="sidebar-item__date">
+            {/* <div className="sidebar-item__date">
               {moment(date.toString()).calendar()}
-            </div>
+            </div> */}
           </Wrapper>
         );
       }}
