@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as moment from "moment";
 import styled from "styled-components";
 import { NotesContext } from "../../context";
 
 const NotesListItem = ({ search, note }) => {
   const { id, title, text } = note;
+  const context = useContext(NotesContext);
   if (
     search !== "" &&
     !text.toLowerCase().includes(search.toLowerCase()) &&
@@ -13,24 +14,18 @@ const NotesListItem = ({ search, note }) => {
     return null;
   }
 
-  return (
-    <NotesContext.Consumer>
-      {(value) => {
-        const handleClick = () => {
-          value.handleOpenNote(id, title, text);
-        };
+  const handleClick = () => {
+    context.handleOpenNote(id, title, text);
+  };
 
-        return (
-          <Wrapper onClick={handleClick}>
-            <div className="sidebar-item__title">{title}</div>
-            <div className="sidebar-item__text">{text}</div>
-            {/* <div className="sidebar-item__date">
+  return (
+    <Wrapper onClick={handleClick}>
+      <div className="sidebar-item__title">{title}</div>
+      <div className="sidebar-item__text">{text}</div>
+      {/* <div className="sidebar-item__date">
               {moment(date.toString()).calendar()}
             </div> */}
-          </Wrapper>
-        );
-      }}
-    </NotesContext.Consumer>
+    </Wrapper>
   );
 };
 

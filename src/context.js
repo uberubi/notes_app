@@ -66,17 +66,10 @@ const NotesProvider = (props) => {
     });
   };
 
-  const changeOpenNoteTitleHandler = (title) => {
+  const OpenNoteChanger = (prop, value) => {
     setOpenNote((prevState) => ({
       ...prevState,
-      title,
-    }));
-  };
-
-  const changeOpenNoteTextHandler = (text) => {
-    setOpenNote((prevState) => ({
-      ...prevState,
-      text,
+      [prop]: value
     }));
   };
 
@@ -90,8 +83,7 @@ const NotesProvider = (props) => {
         handleUpdateNote,
         isNoteOpen,
         openNote,
-        changeOpenNoteTitleHandler,
-        changeOpenNoteTextHandler,
+        OpenNoteChanger,
         clearOpenNote,
       }}
     >

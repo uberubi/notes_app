@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "antd";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Workspace from "./components/Workspace/Workspace";
+import NotesWorkspaceContainer from "./components/NotesWorkSpace/NotesWorkspaceContainer";
 import "./App.css";
 import { NotesProvider } from "./context";
 
@@ -15,7 +15,7 @@ const App = (props) => {
           </Col>
 
           <Col flex="auto" className="workspace">
-            <Workspace />
+            <NotesWorkspaceContainer />
           </Col>
         </Row>
       </NotesProvider>
