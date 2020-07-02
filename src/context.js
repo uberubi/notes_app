@@ -25,6 +25,7 @@ const NotesProvider = (props) => {
       const note = {
         title,
         text,
+        date: new Date()
       };
       db.notes.add(note).then(async () => {
         let notes = await db.notes.toArray();
@@ -42,7 +43,7 @@ const NotesProvider = (props) => {
   };
 
   const handleUpdateNote = (id, title, text) => {
-    db.notes.update(id, { title, text }).then(async () => {
+    db.notes.update(id, { title, text, date: new Date() }).then(async () => {
       let notes = await db.notes.toArray();
       setState(notes);
     });

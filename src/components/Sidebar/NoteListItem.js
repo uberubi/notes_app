@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { NotesContext } from "../../context";
 
 const NotesListItem = ({ search, note }) => {
-  const { id, title, text } = note;
+  const { id, title, text, date } = note;
   const context = useContext(NotesContext);
   if (
     search !== "" &&
@@ -22,9 +22,9 @@ const NotesListItem = ({ search, note }) => {
     <Wrapper onClick={handleClick}>
       <div className="sidebar-item__title">{title}</div>
       <div className="sidebar-item__text">{text}</div>
-      {/* <div className="sidebar-item__date">
+      <div className="sidebar-item__date">
               {moment(date.toString()).calendar()}
-            </div> */}
+            </div>
     </Wrapper>
   );
 };
