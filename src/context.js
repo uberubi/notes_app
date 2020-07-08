@@ -25,13 +25,14 @@ const NotesProvider = (props) => {
       const note = {
         title,
         text,
-        date: new Date()
+        date: new Date(),
       };
       db.notes.add(note).then(async () => {
         let notes = await db.notes.toArray();
         setState(notes);
       });
     }
+    setIsNoteOpen(false);
   };
 
   const handleDeleteNote = (id) => {
@@ -43,34 +44,33 @@ const NotesProvider = (props) => {
   };
 
   const handleUpdateNote = (id, title, text) => {
-    db.notes.update(id, { title, text, date: new Date() }).then(async () => {
-      let notes = await db.notes.toArray();
-      setState(notes);
-    });
+    if (title !== "" && text !== "") {
+      db.notes.update(id, { title, text, date: new Date() }).then(async () => {
+        let notes = await db.notes.toArray();
+        setState(notes);
+      });
+      setIsNoteOpen(false);
+    }
+  };
+
+  const handleClearField = () => {
     setIsNoteOpen(false);
   };
 
-  const handleOpenNote = (id, title, text) => {
+  const handleOpenNote = (id, title, text, date) => {
     setIsNoteOpen(true);
     setOpenNote({
       id,
       title,
       text,
-    });
-  };
-
-  const clearOpenNote = () => {
-    setOpenNote({
-      title: "",
-      text: "",
-      date: "",
+      date,
     });
   };
 
   const OpenNoteChanger = (prop, value) => {
     setOpenNote((prevState) => ({
       ...prevState,
-      [prop]: value
+      [prop]: value,
     }));
   };
 
@@ -85,7 +85,7 @@ const NotesProvider = (props) => {
         isNoteOpen,
         openNote,
         OpenNoteChanger,
-        clearOpenNote,
+        handleClearField,
       }}
     >
       {props.children}

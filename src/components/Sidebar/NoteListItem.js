@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import * as moment from "moment";
-import styled from "styled-components";
 import { NotesContext } from "../../context";
+import styled from "styled-components";
 
 const NotesListItem = ({ search, note }) => {
   const { id, title, text, date } = note;
@@ -15,26 +15,53 @@ const NotesListItem = ({ search, note }) => {
   }
 
   const handleClick = () => {
-    context.handleOpenNote(id, title, text);
+    context.handleOpenNote(id, title, text, date);
   };
 
   return (
-    <Wrapper onClick={handleClick}>
-      <div className="sidebar-item__title">{title}</div>
-      <div className="sidebar-item__text">{text}</div>
-      <div className="sidebar-item__date">
-              {moment(date.toString()).calendar()}
-            </div>
-    </Wrapper>
+    <CardWrapper onClick={handleClick}>
+      <div className="card-body">
+        <h5 className="card-title">{title}</h5>
+        <hr className='card-separator'/>
+        <p className="card-text">{text}</p>
+        <p className="card-date">{moment(date.toString()).calendar()}</p>
+      </div>
+    </CardWrapper>
   );
 };
 
 export default NotesListItem;
 
-const Wrapper = styled.div`
-  border-bottom: 1px solid grey;
+const CardWrapper = styled.div`
+  background: var(--cardsColor);
+  color: white !important;
+  margin-top: 10px;
+  border-radius: 10px;
+  .card-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 20px;
+  }
+  .card-separator {
+    background-color: white;
+  }
+  .card-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .card-date {
+    float: right;
+    font-size: 12px;
+  }
   &:hover {
-    border: 1px solid grey;
-    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 4px 4px rgba(0.2, 0.2, 0.2, 0.2);
+    transition: All 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  &:active {
+    border: 4px solid #40B3A2;
   }
 `;

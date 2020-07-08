@@ -1,15 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import "antd/dist/antd.css";
-
+import { NotesProvider } from "./context";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <NotesProvider>
+    <React.StrictMode>
       <App />
-  </React.StrictMode>,
+    </React.StrictMode>
+  </NotesProvider>,
   document.getElementById("root")
 );
 

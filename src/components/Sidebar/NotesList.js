@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NotesContext } from "../../context";
 import NotesListItem from "./NoteListItem";
+import styled from "styled-components";
 
 const NotesList = ({ search }) => {
-  return (
-    <NotesContext.Consumer>
-      {(value) => {
-        if (value.state.length === 0) {
-          return <div className="no-items-div">there's no items yet</div>;
-        } else {
-          return value.state.map((note) => {
-            return <NotesListItem key={note.id} search={search} note={note} />;
-          });
-        }
-      }}
-    </NotesContext.Consumer>
-  );
+  const context = useContext(NotesContext);
+
+  if (context.state.length === 0) {
+    return <NoItemsWrapper className="no-items-div"> there's no items yet...</NoItemsWrapper>;
+  }
+
+  return context.state.map((note) => (
+    <NotesListItem key={note.id} search={search} note={note} />
+  ));
 };
 
 export default NotesList;
+
+const NoItemsWrapper = styled.div`
+margin-top: 20px;
+font-size: 24px;
+text-align: center;
+  color: #14E8C8;
+`

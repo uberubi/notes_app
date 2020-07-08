@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { NotesContext } from "../../context";
-import NotesWorkspace from "./NotesWorkspace";
+import NotesWorkspace from "./Workspace";
 
-const NotesWorkspaceContainer = (props) => {
+const WorkspaceContainer = (props) => {
   const context = useContext(NotesContext);
   const {
     isNoteOpen,
@@ -11,18 +11,17 @@ const NotesWorkspaceContainer = (props) => {
     handleAddNewNote,
     handleDeleteNote,
     handleUpdateNote,
-    clearOpenNote,
+    handleClearField
   } = context;
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-
-  console.log(context.openNote, " ITE THEME");
-
+  const [date, setDate] = useState("");
   useEffect(() => {
     if (isNoteOpen) {
       setTitle(openNote.title);
       setText(openNote.text);
+      setDate(openNote.date)
     } else {
       setTitle("");
       setText("");
@@ -40,15 +39,15 @@ const NotesWorkspaceContainer = (props) => {
     switch (action) {
       case "add":
         handleAddNewNote(title, text);
-        setTitle("");
-        setText("");
-        clearOpenNote();
         break;
       case "delete":
         handleDeleteNote(openNote.id);
         break;
       case "update":
         handleUpdateNote(openNote.id, title, text);
+        break;
+      case "clear":
+        handleClearField()
         break;
       default:
         break;
@@ -62,8 +61,9 @@ const NotesWorkspaceContainer = (props) => {
       isNoteOpen={isNoteOpen}
       title={title}
       text={text}
+      date={date}
     />
   );
 };
 
-export default NotesWorkspaceContainer;
+export default WorkspaceContainer;

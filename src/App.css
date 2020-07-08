@@ -1,29 +1,35 @@
-.search-field {
-  background-color: aqua;
+html {
+  font-size: 8px;
 }
 
-.workspace {
-  background-color: brown;
+@media (min-width: 544px) {
+  html {
+    font-size: 10px;
+  }
 }
 
-.sidebar {
-  background-color: rgb(247, 247, 247);
+@media (min-width: 768px) {
+  html {
+    font-size: 12px;
+  }
 }
 
-.sidebar-item {
+@media (min-width: 992px) {
+  html {
+    font-size: 18px;
+  }
 
-  border: 1px solid black;
+
 }
 
-.sidebar-item__title {
-  overflow:hidden;
-  max-width: 150px;
-  white-space:nowrap;
-  text-overflow:ellipsis;
-  
+:root {
+  --mainBrown: #A0522D;
+  --backgroundColor: #7cc1ac;
+  --cardsColor: #E27D5F;
+  --navbarColor: #E27D5F;
+  --workSpaceColor: #E8A87C;
 }
 
-.sidebar-item__title:hover {
-  overflow:visible;
-
+body {
+  font-family: 'Oswald', sans-serif !important;
 }

@@ -1,11 +1,13 @@
 import React from "react";
-import { Input } from "antd";
-const { Search } = Input;
 
-const SearchField = ({ handleSearch }) => {
+const SearchField = ({ handleChange }) => {
   return (
     <div>
-      <Search placeholder="lets find a note..." onChange={handleSearch} />
+      <input
+        placeholder="lets find a note..."
+        onChange={handleChange}
+        style={{ width: "100%" }}
+      />
     </div>
   );
 };
