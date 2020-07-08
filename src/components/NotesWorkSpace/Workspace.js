@@ -2,7 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import * as moment from "moment";
 
-const Workspace = ({ changeHandler, handleClick, isNoteOpen, title, text, date }) => {
+const Workspace = ({
+  changeHandler,
+  handleClick,
+  isNoteOpen,
+  title,
+  text,
+  date,
+}) => {
   return (
     <WorkspaceWrapper>
       <h3>Title:</h3>
@@ -17,7 +24,7 @@ const Workspace = ({ changeHandler, handleClick, isNoteOpen, title, text, date }
 
       {isNoteOpen && (
         <>
-        <div>{moment(date.toString()).calendar()}</div>
+          <div>{moment(date.toString()).calendar()}</div>
           <Button
             onClick={handleClick("delete")}
             className="btn btn-danger btn-sm"
@@ -30,8 +37,12 @@ const Workspace = ({ changeHandler, handleClick, isNoteOpen, title, text, date }
           >
             UPDATE
           </Button>
-          <Button onClick={handleClick('clear')} className="btn btn-secondary btn-sm">CLEAR INPUT</Button>
-          
+          <Button
+            onClick={handleClick("clear")}
+            className="btn btn-secondary btn-sm"
+          >
+            CLEAR INPUT
+          </Button>
         </>
       )}
       <Button onClick={handleClick("add")} className="btn btn-success btn-sm">
@@ -73,7 +84,7 @@ const Textarea = styled.textarea`
   resize: none;
   outline: none;
   background: var(--workSpaceColor);
-  
+
   color: white;
   border: 2px solid #40b3a2;
 `;

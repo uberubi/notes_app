@@ -8,10 +8,7 @@ const WorkspaceContainer = (props) => {
     isNoteOpen,
     openNote,
     OpenNoteChanger,
-    handleAddNewNote,
-    handleDeleteNote,
-    handleUpdateNote,
-    handleClearField
+    handleNotes
   } = context;
 
   const [title, setTitle] = useState("");
@@ -25,8 +22,9 @@ const WorkspaceContainer = (props) => {
     } else {
       setTitle("");
       setText("");
+      setDate("")
     }
-  }, [openNote.title, openNote.text, isNoteOpen]);
+  }, [openNote.title, openNote.text, openNote.date, isNoteOpen]);
 
   const changeHandler = (prop) => (e) => {
     if (isNoteOpen) {
@@ -36,22 +34,23 @@ const WorkspaceContainer = (props) => {
   };
 
   const handleClick = (action) => () => {
-    switch (action) {
-      case "add":
-        handleAddNewNote(title, text);
-        break;
-      case "delete":
-        handleDeleteNote(openNote.id);
-        break;
-      case "update":
-        handleUpdateNote(openNote.id, title, text);
-        break;
-      case "clear":
-        handleClearField()
-        break;
-      default:
-        break;
-    }
+    // switch (action) {
+    //   case "add":
+    //     handleAddNewNote(title, text);
+    //     break;
+    //   case "delete":
+    //     handleDeleteNote(openNote.id);
+    //     break;
+    //   case "update":
+    //     handleUpdateNote(openNote.id, title, text);
+    //     break;
+    //   case "clear":
+    //     handleClearField()
+    //     break;
+    //   default:
+    //     break;
+    // }
+    handleNotes(title, text, action, openNote.id)
   };
 
   return (
