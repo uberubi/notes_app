@@ -7,7 +7,12 @@ const NotesList = ({ search }) => {
   const context = useContext(NotesContext);
 
   if (context.state.length === 0) {
-    return <NoItemsWrapper className="no-items-div"> there's no items yet...</NoItemsWrapper>;
+    return (
+      <NoItemsWrapper className="no-items-div">
+        {" "}
+        there's no items yet...
+      </NoItemsWrapper>
+    );
   }
 
   return context.state.map((note) => (
@@ -18,8 +23,8 @@ const NotesList = ({ search }) => {
 export default NotesList;
 
 const NoItemsWrapper = styled.div`
-margin-top: 20px;
-font-size: 24px;
-text-align: center;
-  color: #14E8C8;
-`
+  margin-top: 20px;
+  font-size: 24px;
+  text-align: center;
+  color: #14e8c8;
+`;

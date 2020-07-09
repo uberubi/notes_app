@@ -4,13 +4,12 @@ import WorkspaceContainer from "./components/NotesWorkSpace/WorkspaceContainer";
 import "./App.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import Navbar from "./components/Navbar/Navbar";
-import styled from "styled-components";
 
 const App = () => {
   return (
-    <AppWrapper>
-      <Container className="container">
+      <Container>
         <Navbar />
         <Row>
           <Col xs={3} lg="3">
@@ -21,14 +20,8 @@ const App = () => {
           </Col>
         </Row>
       </Container>
-    </AppWrapper>
   );
 };
 
 export default App;
 
-const Container = styled.div``;
-const AppWrapper = styled.div`
-  background-color: var(--backgroundColor);
-  background-size: cover;
-`;
